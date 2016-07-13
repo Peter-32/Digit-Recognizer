@@ -33,12 +33,40 @@ train <- read.table("DigitRecognition/train.csv",header=TRUE,sep=",")
 
 ########FUNCTIONS########################
 #Return the row of the first non-black point. (0 to 27)
-maxTop <- function(df, row){
-  for (col in 2:785 ) {
-    if (df[row,col] != 0){
-      return(  floor( (col-2) / 28)  )
+#firstNonBlackRow(train,2000)
+firstNonBlackRow <- function(df, observation){
+  for (dfCol in 2:785 ) {
+    if (df[observation,dfCol] != 0){
+      pixelIdx <- dfCol-2
+      return(  floor(pixelIdx / 28)  ) 
     }
   }
 }
 
-maxTop(train,1)
+#Return the row of the last non-black point. (0 to 27)
+#lastNonBlackRow(train,2000)
+lastNonBlackRow <- function(df, observation){
+  for (dfCol in 785:2 ) {
+    if (df[observation,dfCol] != 0){
+      pixelIdx <- dfCol-2
+      return(  floor(pixelIdx / 28)  )
+    }
+  }
+}
+
+#Return the column of the first non-black point. (0 to 27)
+#firstNonBlackColumn(train,2000)
+firstNonBlackColumn <- function(df, observation){
+  for (dfCol in 2:785 ) {
+    if (df[observation,dfCol] != 0){
+      
+    }
+  }
+}
+
+#Return the column of the last non-black point. (0 to 27)
+#lastNonBlackColumn(train,2000)
+
+
+
+
