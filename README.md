@@ -14,9 +14,10 @@ The Digit-Recognizer program will read an image and classify it as one of ten di
 
 ## Files
 - "script.R" holds the R code used to build the model and test the model.
+- "SubmissionResultsKaggle.PNG" and "SubmissionResultsKaggle 2nd Attempt.PNG" have the Kaggle results.
+- "Compressed train and test files" holds the "train.csv", "test.csv", "test.Rda" and "train.Rda" files.
 - The files "train.csv" and "test.csv" were used to train and test the model respectively.  
 - The files "test.Rda" and "train.Rda" are files that can be loaded into R with the features already added.
-- "SubmissionResultsKaggle.PNG" and "SubmissionResultsKaggle 2nd Attempt.PNG" have the Kaggle results.
 
 ## Area of improvement for the model
 - Use 5-fold cross-validation on the training set.  This would very likely give a better success rate than 83.614%.
