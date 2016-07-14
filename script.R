@@ -1,8 +1,10 @@
 #Setup
 # first run: install.packages("MASS")
 #            install.packages("ISLR")
+#            install.packages("ROCR")
 library(MASS)
 library(ISLR)
+library(ROCR)
 
 #USE THESE LINES TO SAVE/LOAD DATA FRAMES
 #save(train,file="DigitRecognition/train.Rda")
@@ -677,3 +679,24 @@ qda.class=qda.pred$class
 output2 <- data.frame(1:28000,qda.class)
 names(output2) <- c("ImageId","Label")
 write.table(output2, file="DigitRecognition/submission2.csv",sep=",", row.names=TRUE, col.names=FALSE)
+
+#####IMPROVEMENTS: Use CV and reduce feature count
+######USING CROSS VALIDATION
+
+idx=sample(1:nrow(train),0.8*nrow(train))
+cv.train=train[idx,]
+cv.test=train[-idx,]
+cv.qda.fit = qda(label ~ pctNonBlackBoxes + pointOfInterest1IsNonBlack + pointOfInterest2IsNonBlack +
+                    pointOfInterest3IsNonBlack + pointOfInterest4IsNonBlack + pointOfInterest5IsNonBlack +
+                    pointOfInterest6IsNonBlack + pointOfInterest7IsNonBlack + pointOfInterest8IsNonBlack +
+                    pointOfInterest9IsNonBlack + pointOfInterest10IsNonBlack + pointOfInterest11IsNonBlack +
+                    pointOfInterest12IsNonBlack + pointOfInterest13IsNonBlack + width + height +
+                    countNewlyNonBlackOn3HorizontalLinesPath + countNewlyNonBlackOn3VerticalLinesPath +
+                    countNewlyNonBlackOnCrossXPath + pctNonBlackBoxesTopHalf + pctNonBlackBoxesBottomHalf +
+                    pctNonBlackBoxesLeftHalf + pctNonBlackBoxesRightHalf +
+                    pctNonBlackBoxesTopHalfDividedByBottomHalf +
+                    pctNonBlackBoxesLeftHalfDividedByRightHalf,data=cv.train)
+
+cv.preds=predict(cv.qda.fit, cv.test)$class
+actual=cv.test$label
+mean(actual==cv.preds)
