@@ -21,6 +21,7 @@ The Digit-Recognizer program will read an image and classify it as one of ten di
 
 ## Area of improvement for the model
 - Use 5-fold cross-validation on the training set.  This would very likely give a better success rate than 83.614%.
+- I later learned that principle component analysis, standardization, and KNN makes this much simpler to code and gives a very high accuracy.
 
 ## Feature Names:
 - pctNonBlackBoxes
